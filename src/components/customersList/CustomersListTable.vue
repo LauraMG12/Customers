@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { customers } from "../../data/FakeData";
 import { CustomerInfo } from "../../data/fakeData.model";
+import AppButton from "../shared/AppButton.vue";
+import CustomerProducts from "./CustomerProducts.vue";
 
 function getCustomerFullName(customerInfo: CustomerInfo): string {
   return `${customerInfo.givenName} ${customerInfo.familyName1}`;
@@ -11,10 +13,10 @@ function getCustomerFullName(customerInfo: CustomerInfo): string {
   <table class="customers-list-table">
     <thead class="table-header">
       <tr>
-        <th>Customer id</th>
-        <th>Customer Name</th>
-        <th>Products</th>
-        <th>Details</th>
+        <th style="width: 25%">Customer id</th>
+        <th style="width: 25%">Customer Name</th>
+        <th style="width: 45%">Products</th>
+        <th style="width: 5%">Details</th>
       </tr>
     </thead>
     <tbody class="table-body">
@@ -25,7 +27,7 @@ function getCustomerFullName(customerInfo: CustomerInfo): string {
         </td>
         <td><CustomerProducts :products="customer.productsInfo" /></td>
         <td>
-          <Button>Details</Button>
+          <AppButton>Details</AppButton>
         </td>
       </tr>
     </tbody>
@@ -47,6 +49,9 @@ function getCustomerFullName(customerInfo: CustomerInfo): string {
     th {
       padding-bottom: 15px;
       text-align: start;
+      font-size: 14x;
+      font-weight: 500;
+      color: #b5b7c0;
     }
   }
   .table-body {
@@ -55,6 +60,8 @@ function getCustomerFullName(customerInfo: CustomerInfo): string {
     }
     td {
       padding: 20px 0;
+      font-size: 14x;
+      color: #292d32;
     }
   }
 }

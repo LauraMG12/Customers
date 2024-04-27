@@ -7,7 +7,7 @@ import Arrow from "../shared/icons/Arrow.vue";
 const isDropdownOpened = ref<boolean>(false);
 const sortDropdownRef = ref(null);
 const selectedOption = ref<string | undefined>();
-const defaultSelectedOption = ref<string>("Alphabetically");
+const defaultSelectedOption = ref<string>("Customer name");
 
 function toggleDropdown(): void {
   isDropdownOpened.value = !isDropdownOpened.value;
@@ -33,8 +33,8 @@ onClickOutside(sortDropdownRef, closeDropdown);
       <Arrow />
     </div>
     <div v-if="isDropdownOpened" class="dropdown-select">
-      <option class="dropdown-option" @click="setSelected('Alphabetically')">
-        Alphabetically
+      <option class="dropdown-option" @click="setSelected('Customer name')">
+        Customer name
       </option>
       <option class="dropdown-option" @click="setSelected('Customer id')">
         Customer id
@@ -71,7 +71,7 @@ onClickOutside(sortDropdownRef, closeDropdown);
     position: absolute;
     border-radius: 10px;
     background-color: #f9fbff;
-    top: 100%;
+    top: calc(100% + 5px);
     left: 0;
     width: 100%;
     overflow: hidden;
@@ -79,6 +79,8 @@ onClickOutside(sortDropdownRef, closeDropdown);
     .dropdown-option {
       width: 100%;
       padding: 5px 15px;
+      transition: all 0.2s ease;
+
       @media (hover: hover) {
         &:hover {
           background-color: #3d3c42;
