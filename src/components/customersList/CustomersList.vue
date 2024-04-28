@@ -23,6 +23,6 @@ import CustomersListTable from "./CustomersListTable.vue";
   max-width: 1065px;
 
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 50px 20px;
 }
 </style>

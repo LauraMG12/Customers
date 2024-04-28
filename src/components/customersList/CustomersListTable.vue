@@ -1,33 +1,30 @@
 <script setup lang="ts">
 import { customers } from "../../data/FakeData";
-import { CustomerInfo } from "../../data/fakeData.model";
 import AppButton from "../shared/AppButton.vue";
-import CustomerProducts from "./CustomerProducts.vue";
+import { useCustomersListStore } from "../../stores/customersStore";
 
-function getCustomerFullName(customerInfo: CustomerInfo): string {
-  return `${customerInfo.givenName} ${customerInfo.familyName1}`;
-}
+const customersStore = useCustomersListStore();
 </script>
 
 <template>
   <table class="customers-list-table">
     <thead class="table-header">
       <tr>
-        <th style="width: 25%">Customer id</th>
-        <th style="width: 25%">Customer Name</th>
-        <th style="width: 45%">Products</th>
-        <th style="width: 5%">Details</th>
+        <th style="width: 45%">Customer id</th>
+        <th style="width: 45%">Customer Name</th>
+        <th style="width: 10%">Details</th>
       </tr>
     </thead>
     <tbody class="table-body">
       <tr v-for="customer in customers" :key="customer.customerInfo.customerId">
         <td>{{ customer.customerInfo.customerId }}</td>
         <td>
-          {{ getCustomerFullName(customer.customerInfo) }}
+          {{ customersStore.getCustomerFullName(customer.customerInfo) }}
         </td>
-        <td><CustomerProducts :products="customer.productsInfo" /></td>
         <td>
-          <AppButton>Details</AppButton>
+          <AppButton @click="customersStore.openCustomerDetailsCard(customer)"
+            >Details</AppButton
+          >
         </td>
       </tr>
     </tbody>

@@ -22,10 +22,6 @@ import SortDropdown from "./SortDropdown.vue";
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  .title {
-    font-size: 22px;
-    font-weight: 700;
-  }
   .actions {
     display: flex;
     align-items: center;
