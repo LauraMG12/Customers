@@ -5,8 +5,8 @@ import { useCustomersStore } from "./customersStore";
 export const useFetchStore = defineStore("FetchStore", () => {
   const customersStore = useCustomersStore();
   // State
-  const loading = ref(false);
-  const error = ref(null);
+  const loading = ref<boolean>(false);
+  const error = ref<string | null>(null);
 
   // Actions
   async function fetchCustomersFromApi(): Promise<void> {
@@ -16,7 +16,7 @@ export const useFetchStore = defineStore("FetchStore", () => {
       fetch("http://localhost:3000/customers?_sort=givenName").then((res) =>
         res.json().then((res) => customersStore.setCustomersList(res))
       );
-    } catch (err) {
+    } catch (err: any) {
       error.value = err.toString();
     } finally {
       loading.value = false;
@@ -31,8 +31,12 @@ export const useFetchStore = defineStore("FetchStore", () => {
       return fetch(`http://localhost:3000/products?customerId=${customerId}`)
         .then((res) => res.json())
         .then((res) => customersStore.setCustomerProducts(res));
-    } catch (err) {
-      error.value = err.toString();
+    } catch (err: any) {
+      if (err instanceof Error) {
+        error.value = err.toString();
+      } else {
+        console.log("Unknown error", error);
+      }
     } finally {
       loading.value = false;
     }
