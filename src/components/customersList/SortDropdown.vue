@@ -65,6 +65,7 @@ onClickOutside(sortDropdownRef, closeDropdown);
   padding: 10px 15px;
   background-color: #f9fbff;
   position: relative;
+  white-space: nowrap;
 
   @media (hover: hover) {
     &:hover,

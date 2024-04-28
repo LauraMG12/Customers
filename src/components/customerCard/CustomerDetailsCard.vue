@@ -45,11 +45,10 @@ onClickOutside(cardWrapperRef, customersStore.closeCustomerDetailsCard);
   justify-content: center;
   background-color: #5d5d5d80;
   .card-wrapper {
-    max-width: 968px;
-    max-height: 812px;
     margin: 25px 20px;
+    max-width: 968px;
     width: 100%;
-    max-height: 100%;
+    max-height: calc(100% - 80px);
     background-color: #ffffff;
     border-radius: 30px;
     padding: 40px;
@@ -57,6 +56,10 @@ onClickOutside(cardWrapperRef, customersStore.closeCustomerDetailsCard);
     flex-direction: column;
     gap: 40px;
     position: relative;
+    overflow-y: hidden;
+    @media (width < 750px) {
+      padding: 30px 20px;
+    }
     .close-button {
       position: absolute;
       top: 40px;

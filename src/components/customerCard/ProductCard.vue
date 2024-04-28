@@ -47,6 +47,9 @@ const props = defineProps<ProductCardProps>();
       border: 1px solid #404b52;
     }
   }
+  @media (width < 750px) {
+    padding: 20px 10px;
+  }
 
   .product-name {
     font-size: 20px;

@@ -23,9 +23,10 @@ const emit = defineEmits<CustomersListEmits>();
 
 <style scoped lang="scss">
 .customers-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr;
+  align-items: start;
   justify-content: center;
 
   gap: 50px;

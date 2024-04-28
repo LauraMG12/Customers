@@ -43,6 +43,10 @@ const props = defineProps<CustomerInfoProps>();
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
+    @media (width < 750px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(4, auto);
+    }
   }
 }
 </style>

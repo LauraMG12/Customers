@@ -24,9 +24,14 @@ const emit = defineEmits<CustomersListHeaderEmits>();
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  gap: 16px;
+  position: fixed;
+  top: 0;
+
   width: 100%;
   .actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 16px;
     font-size: 12px;
