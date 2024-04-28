@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProductsInfo } from "../../data/fakeData.model";
+import { ProductsInfo } from "../../model/data.model";
 import ProductCard from "./ProductCard.vue";
 
 interface ProductsInfoProps {

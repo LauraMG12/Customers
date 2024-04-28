@@ -1,0 +1,76 @@
+{
+  "customers": [
+    {
+      "_id": "123456",
+      "docType": "nif",
+      "docNum": "123456789",
+      "email": "example@email.com",
+      "customerId": "54321",
+      "givenName": "John",
+      "familyName1": "Doe",
+      "phone": "123456789"
+    },
+    {
+      "_id": "654321",
+      "docType": "passport",
+      "docNum": "987654321",
+      "email": "example2@email.com",
+      "customerId": "98765",
+      "givenName": "Jane",
+      "familyName1": "Smith",
+      "phone": "987654321"
+    },
+    {
+      "_id": "111111",
+      "docType": "nif",
+      "docNum": "111111111",
+      "email": "example3@email.com",
+      "customerId": "11111",
+      "givenName": "Mike",
+      "familyName1": "Johnson",
+      "phone": "111111111"
+    }
+  ],
+  "products": [
+    {
+      "_id": 1111111,
+      "productName": "FIBRA 1000MB",
+      "mbSpeed": 1000,
+      "gbData": null,
+      "productTypeName": "ftth",
+      "numeracioTerminal": 933933933,
+      "soldAt": "2019-01-09 14:26:17",
+      "customerId": "54321"
+    },
+    {
+      "_id": 1111112,
+      "productName": "MOBIL 500GB",
+      "mbSpeed": null,
+      "gbData": 500,
+      "productTypeName": "4G",
+      "numeracioTerminal": 696696969,
+      "soldAt": "2020-08-01 18:30:27",
+      "customerId": "54321"
+    },
+    {
+      "_id": 1111113,
+      "productName": "FIBRA 1000MB",
+      "mbSpeed": 1000,
+      "gbData": null,
+      "productTypeName": "ftth",
+      "numeracioTerminal": 933933933,
+      "soldAt": "2019-01-09 14:26:17",
+      "customerId": "98765"
+    },
+    {
+      "_id": 1111114,
+      "productName": "MOBIL 500GB",
+      "mbSpeed": null,
+      "gbData": 500,
+      "productTypeName": "4G",
+      "numeracioTerminal": 696696969,
+      "soldAt": "2020-08-01 18:30:27",
+      "customerId": "11111"
+    }
+  ]
+}

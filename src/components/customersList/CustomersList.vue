@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import { CustomerInfo } from "../../model/data.model";
 import CustomersListHeader from "./CustomersListHeader.vue";
 import CustomersListTable from "./CustomersListTable.vue";
+
+interface CustomersListProps {
+  customers: CustomerInfo[];
+}
+const props = defineProps<CustomersListProps>();
 </script>
 
 <template>
   <div class="customers-list">
     <CustomersListHeader />
-    <CustomersListTable />
+    <CustomersListTable :customers="props.customers" />
   </div>
 </template>
 

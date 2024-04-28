@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import CustomersList from "./components/customersList/CustomersList.vue";
 import CustomerDetailsCard from "./components/customerCard/CustomerDetailsCard.vue";
-import { useCustomersListStore } from "./stores/customersStore";
+import { useCustomersStore } from "./stores/customersStore";
+import { useFetchStore } from "./stores/fetchStore";
 
-const customersStore = useCustomersListStore();
+const customersStore = useCustomersStore();
+const fetchStore = useFetchStore();
+
+fetchStore.fetchCustomersFromApi();
 </script>
 
 <template>
-  <CustomersList />
+  <CustomersList :customers="customersStore.customers" />
   <CustomerDetailsCard
     v-if="
       customersStore.isCustomerDetailsCardOpened &&
-      customersStore.customerDetailsData
+      customersStore.customerProducts &&
+      customersStore.customerDetails
     "
-    :customer-details="customersStore.customerDetailsData"
+    :customer-products="customersStore.customerProducts"
+    :customer-details="customersStore.customerDetails"
   />
 </template>
-
-<style scoped lang="scss"></style>

@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { customers } from "../../data/FakeData";
+import { CustomerInfo } from "../../model/data.model";
+import { useCustomersStore } from "../../stores/customersStore";
 import AppButton from "../shared/AppButton.vue";
-import { useCustomersListStore } from "../../stores/customersStore";
 
-const customersStore = useCustomersListStore();
+interface CustomersListTableProps {
+  customers: CustomerInfo[];
+}
+const props = defineProps<CustomersListTableProps>();
+
+const customersStore = useCustomersStore();
 </script>
 
 <template>
@@ -15,22 +20,21 @@ const customersStore = useCustomersListStore();
         <th style="width: 10%">Details</th>
       </tr>
     </thead>
-    <tbody class="table-body">
-      <tr v-for="customer in customers" :key="customer.customerInfo.customerId">
-        <td>{{ customer.customerInfo.customerId }}</td>
+    <p v-if="props.customers.length === 0">No results</p>
+    <tbody v-else class="table-body">
+      <tr v-for="customer in props.customers" :key="customer.customerId">
+        <td>{{ customer.customerId }}</td>
         <td>
-          {{ customersStore.getCustomerFullName(customer.customerInfo) }}
+          {{ customersStore.getCustomerFullName(customer) }}
         </td>
         <td>
-          <AppButton @click="customersStore.openCustomerDetailsCard(customer)"
+          <AppButton
+            @click="customersStore.openCustomerDetailsCard(customer.customerId)"
             >Details</AppButton
           >
         </td>
       </tr>
     </tbody>
-    <tfoot>
-      <TablePagination />
-    </tfoot>
   </table>
 </template>
 

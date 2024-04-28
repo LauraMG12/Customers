@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
+    "startDB": "json-server --watch src/data/db.json",
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"

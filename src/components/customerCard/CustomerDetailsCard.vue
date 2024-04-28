@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { onClickOutside } from "@vueuse/core";
 import { ref } from "vue";
-import { useCustomersListStore } from "../../stores/customersStore";
-import { Customer } from "../../data/fakeData.model";
-import CustomerInfo from "./CustomerInfo.vue";
-import ProductsInfo from "./ProductsInfo.vue";
+import { useCustomersStore } from "../../stores/customersStore";
+import { CustomerInfo, ProductsInfo } from "../../model/data.model";
+import CustomerData from "./CustomerData.vue";
+import ProductsData from "./ProductsData.vue";
 import Close from "../shared/icons/Close.vue";
 
-const customersStore = useCustomersListStore();
+const customersStore = useCustomersStore();
 
 interface CustomerDetailsCardProps {
-  customerDetails: Customer;
+  customerDetails: CustomerInfo;
+  customerProducts: ProductsInfo[];
 }
 const props = defineProps<CustomerDetailsCardProps>();
 const cardWrapperRef = ref(null);
@@ -25,8 +26,8 @@ onClickOutside(cardWrapperRef, customersStore.closeCustomerDetailsCard);
         class="close-button"
         @click="customersStore.closeCustomerDetailsCard()"
       />
-      <CustomerInfo :customer-data="props.customerDetails.customerInfo" />
-      <ProductsInfo :products-data="props.customerDetails.productsInfo" />
+      <CustomerData :customer-data="props.customerDetails" />
+      <ProductsData :products-data="props.customerProducts" />
     </div>
   </div>
 </template>

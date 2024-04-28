@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useCustomersListStore } from "../../stores/customersStore";
+import { useCustomersStore } from "../../stores/customersStore";
 
-import { CustomerInfo } from "../../data/fakeData.model";
+import { CustomerInfo } from "../../model/data.model";
 
-const customersStore = useCustomersListStore();
+const customersStore = useCustomersStore();
 
 interface CustomerInfoProps {
   customerData: CustomerInfo;

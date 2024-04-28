@@ -1,8 +1,3 @@
-export interface Customer {
-  customerInfo: CustomerInfo;
-  productsInfo: ProductsInfo[];
-}
-
 export interface CustomerInfo {
   _id: number;
   docType: string;

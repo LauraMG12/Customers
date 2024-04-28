@@ -1,0 +1,51 @@
+import { defineStore } from "pinia";
+import { ref } from "vue";
+import { useCustomersStore } from "./customersStore";
+
+export const useFetchStore = defineStore("FetchStore", () => {
+  const customersStore = useCustomersStore();
+  // State
+  const loading = ref(false);
+  const error = ref(null);
+
+  // Actions
+  async function fetchCustomersFromApi(): Promise<void> {
+    console.log("fetchCustomersFromApi");
+    loading.value = true;
+    try {
+      fetch("http://localhost:3000/customers?_sort=givenName").then((res) =>
+        res.json().then((res) => customersStore.setCustomersList(res))
+      );
+    } catch (err) {
+      error.value = err.toString();
+    } finally {
+      loading.value = false;
+    }
+  }
+
+  async function fetchCustomerProductsFromApi(
+    customerId: string
+  ): Promise<void> {
+    loading.value = true;
+    try {
+      return fetch(`http://localhost:3000/products?customerId=${customerId}`)
+        .then((res) => res.json())
+        .then((res) => customersStore.setCustomerProducts(res));
+    } catch (err) {
+      error.value = err.toString();
+    } finally {
+      loading.value = false;
+    }
+  }
+  // Getters
+
+  return {
+    // State
+
+    // Actions
+    fetchCustomersFromApi,
+    fetchCustomerProductsFromApi,
+
+    // Getters
+  };
+});
