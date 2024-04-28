@@ -13,8 +13,8 @@ export const useFetchStore = defineStore("FetchStore", () => {
     console.log("fetchCustomersFromApi");
     loading.value = true;
     try {
-      fetch("http://localhost:3000/customers?_sort=givenName").then((res) =>
-        res.json().then((res) => customersStore.setCustomersList(res))
+      fetch("https://customersapi.onrender.com/customers?_sort=givenName").then(
+        (res) => res.json().then((res) => customersStore.setCustomersList(res))
       );
     } catch (err: any) {
       error.value = err.toString();
@@ -28,7 +28,9 @@ export const useFetchStore = defineStore("FetchStore", () => {
   ): Promise<void> {
     loading.value = true;
     try {
-      return fetch(`http://localhost:3000/products?customerId=${customerId}`)
+      return fetch(
+        `https://customersapi.onrender.com/products?customerId=${customerId}`
+      )
         .then((res) => res.json())
         .then((res) => customersStore.setCustomerProducts(res));
     } catch (err: any) {
