@@ -10,7 +10,6 @@ export const useFetchStore = defineStore("FetchStore", () => {
 
   // Actions
   async function fetchCustomersFromApi(): Promise<void> {
-    console.log("fetchCustomersFromApi");
     loading.value = true;
     try {
       fetch("https://customersapi.onrender.com/customers?_sort=givenName", {
