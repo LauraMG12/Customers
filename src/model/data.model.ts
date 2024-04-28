@@ -19,3 +19,14 @@ export interface ProductsInfo {
   soldAt: string;
   customerId: string;
 }
+
+declare global {
+  interface Array<T> {
+    toSorted(compareFn?: (a: T, b: T) => number): T[];
+  }
+}
+
+export enum SortType {
+  NAME = "name",
+  ID = "customerId",
+}

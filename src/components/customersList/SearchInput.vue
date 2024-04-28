@@ -4,7 +4,6 @@ import Arrow from "../shared/icons/Search.vue";
 
 interface AppInputEmits {
   (event: "text-changed", value: string): void;
-  (event: "focus-changed", value: boolean): void;
 }
 const emit = defineEmits<AppInputEmits>();
 const inputText = ref<string>("");
@@ -18,7 +17,6 @@ const inputText = ref<string>("");
       type="text"
       placeholder="Search"
       @input="emit('text-changed', ($event.target as HTMLInputElement).value)"
-      @focus="emit('focus-changed', true)"
     />
   </div>
 </template>

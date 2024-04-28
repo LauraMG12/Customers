@@ -1,13 +1,27 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
-
 import Arrow from "../shared/icons/Arrow.vue";
+import { SortType } from "../../model/data.model";
+import { useCustomersStore } from "../../stores/customersStore";
+
+const customersStore = useCustomersStore();
 
 const isDropdownOpened = ref<boolean>(false);
 const sortDropdownRef = ref(null);
-const selectedOption = ref<string | undefined>();
-const defaultSelectedOption = ref<string>("Customer name");
+const customerNameText = "Customer name";
+const customerIdText = "Customer ID";
+const selectedTypeText = computed<string | null>(() => {
+  switch (customersStore.sortType) {
+    case SortType.NAME:
+      return customerNameText;
+    case SortType.ID:
+      return customerIdText;
+    default:
+      new Error("the type selected is not defined");
+      return null;
+  }
+});
 
 function toggleDropdown(): void {
   isDropdownOpened.value = !isDropdownOpened.value;
@@ -15,9 +29,7 @@ function toggleDropdown(): void {
 function closeDropdown(): void {
   isDropdownOpened.value = false;
 }
-function setSelected(selected: string): void {
-  selectedOption.value = selected;
-}
+
 onClickOutside(sortDropdownRef, closeDropdown);
 </script>
 
@@ -26,18 +38,22 @@ onClickOutside(sortDropdownRef, closeDropdown);
     <div class="sort-type">
       <label class="dropdown-label"
         >Sort by:
-        <span class="selected-option">{{
-          selectedOption ?? defaultSelectedOption
-        }}</span></label
+        <span class="selected-option">{{ selectedTypeText }}</span></label
       >
       <Arrow />
     </div>
     <div v-if="isDropdownOpened" class="dropdown-select">
-      <option class="dropdown-option" @click="setSelected('Customer name')">
-        Customer name
+      <option
+        class="dropdown-option"
+        @click="customersStore.setSelectedSortType(SortType.NAME)"
+      >
+        {{ customerNameText }}
       </option>
-      <option class="dropdown-option" @click="setSelected('Customer id')">
-        Customer id
+      <option
+        class="dropdown-option"
+        @click="customersStore.setSelectedSortType(SortType.ID)"
+      >
+        {{ customerIdText }}
       </option>
     </div>
   </div>

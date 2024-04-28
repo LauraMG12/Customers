@@ -15,8 +15,12 @@ export const useFetchStore = defineStore("FetchStore", () => {
       fetch("https://customersapi.onrender.com/customers?_sort=givenName").then(
         (res) => res.json().then((res) => customersStore.setCustomersList(res))
       );
-    } catch (err: any) {
-      error.value = err.toString();
+    } catch (err) {
+      if (err instanceof Error) {
+        error.value = err.toString();
+      } else {
+        new Error("Unknown error");
+      }
     } finally {
       loading.value = false;
     }
@@ -32,11 +36,11 @@ export const useFetchStore = defineStore("FetchStore", () => {
       )
         .then((res) => res.json())
         .then((res) => customersStore.setCustomerProducts(res));
-    } catch (err: any) {
+    } catch (err) {
       if (err instanceof Error) {
         error.value = err.toString();
       } else {
-        console.log("Unknown error", error);
+        new Error("Unknown error");
       }
     } finally {
       loading.value = false;

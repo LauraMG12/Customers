@@ -2,7 +2,10 @@
 import SearchInput from ".//SearchInput.vue";
 import SortDropdown from "./SortDropdown.vue";
 
-// import SearchIcon from "../shared/icons/Search.vue";
+interface CustomersListHeaderEmits {
+  (event: "text-changed", value: string): void;
+}
+const emit = defineEmits<CustomersListHeaderEmits>();
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import SortDropdown from "./SortDropdown.vue";
     <p class="title">Customers</p>
     <div class="actions">
       <SortDropdown />
-      <SearchInput />
+      <SearchInput @text-changed="emit('text-changed', $event)" />
     </div>
   </header>
 </template>

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { CustomerInfo, ProductsInfo } from "../model/data.model";
+import { computed, ref } from "vue";
+import { CustomerInfo, ProductsInfo, SortType } from "../model/data.model";
 import { useFetchStore } from "./fetchStore";
 
 export const useCustomersStore = defineStore("CustomersStore", () => {
@@ -12,6 +12,8 @@ export const useCustomersStore = defineStore("CustomersStore", () => {
   const customerCardDetails = ref<CustomerInfo | undefined>(undefined);
   const customerProductsCache = ref<ProductsInfo[]>([]);
   const customersList = ref<CustomerInfo[]>([]);
+  const filterText = ref<string>("");
+  const sortType = ref<SortType>(SortType.ID);
 
   // Actions
   async function openCustomerDetailsCard(customerId: string): Promise<void> {
@@ -43,15 +45,48 @@ export const useCustomersStore = defineStore("CustomersStore", () => {
 
   function setCustomersList(fetchedData: CustomerInfo[] | undefined): void {
     customersList.value = fetchedData ?? [];
-    console.log("setCustomersList", customersList.value);
   }
 
   function setCustomerProducts(fetchedData: ProductsInfo[] | undefined): void {
     customerCardProducts.value = fetchedData ?? [];
   }
 
+  function getSortedAndFilteredCustomers(): CustomerInfo[] {
+    if (sortType.value === SortType.NAME) {
+      return filteredUsers.value;
+    } else {
+      return filteredUsers.value.toSorted((a, b) => {
+        return a.customerId.localeCompare(b.customerId);
+      });
+    }
+  }
+
+  function setSelectedSortType(selectedType: SortType): void {
+    sortType.value = selectedType;
+  }
+
+  // Getters
+  const filteredUsers = computed<CustomerInfo[]>(() =>
+    filterText.value !== "" && filterText.value.length > 0
+      ? customersList.value.filter(
+          (customer) =>
+            customer.givenName
+              .toLocaleLowerCase()
+              .includes(filterText.value.toLocaleLowerCase()) ||
+            customer.familyName1
+              .toLocaleLowerCase()
+              .includes(filterText.value.toLocaleLowerCase()) ||
+            customer.customerId
+              .toLocaleLowerCase()
+              .includes(filterText.value.toLocaleLowerCase())
+        )
+      : customersList.value
+  );
+
   return {
     // State
+    filterText,
+    sortType,
     isCustomerDetailsCardOpened,
     customerProducts: customerCardProducts,
     customers: customersList,
@@ -63,6 +98,8 @@ export const useCustomersStore = defineStore("CustomersStore", () => {
     getCustomerFullName,
     setCustomersList,
     setCustomerProducts,
+    getSortedAndFilteredCustomers,
+    setSelectedSortType,
 
     // Getters
   };

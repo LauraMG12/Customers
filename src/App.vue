@@ -11,7 +11,10 @@ fetchStore.fetchCustomersFromApi();
 </script>
 
 <template>
-  <CustomersList :customers="customersStore.customers" />
+  <CustomersList
+    :customers="customersStore.getSortedAndFilteredCustomers()"
+    @text-changed="customersStore.filterText = $event"
+  />
   <CustomerDetailsCard
     v-if="
       customersStore.isCustomerDetailsCardOpened &&

@@ -7,11 +7,16 @@ interface CustomersListProps {
   customers: CustomerInfo[];
 }
 const props = defineProps<CustomersListProps>();
+
+interface CustomersListEmits {
+  (event: "text-changed", value: string): void;
+}
+const emit = defineEmits<CustomersListEmits>();
 </script>
 
 <template>
   <div class="customers-list">
-    <CustomersListHeader />
+    <CustomersListHeader @text-changed="emit('text-changed', $event)" />
     <CustomersListTable :customers="props.customers" />
   </div>
 </template>
