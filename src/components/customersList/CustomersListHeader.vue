@@ -25,8 +25,6 @@ const emit = defineEmits<CustomersListHeaderEmits>();
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  position: fixed;
-  top: 0;
 
   width: 100%;
   .actions {
