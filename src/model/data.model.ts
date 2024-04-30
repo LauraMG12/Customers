@@ -30,3 +30,13 @@ export enum SortType {
   NAME = "name",
   ID = "customerId",
 }
+
+export interface ServiceState {
+  fetchCustomers: ServiceStateType;
+  fetchProducts: ServiceStateType;
+}
+
+interface ServiceStateType {
+  loading: boolean;
+  error: string | null;
+}

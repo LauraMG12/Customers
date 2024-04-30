@@ -2,12 +2,12 @@
 import CustomersList from "./components/customersList/CustomersList.vue";
 import CustomerDetailsCard from "./components/customerCard/CustomerDetailsCard.vue";
 import { useCustomersStore } from "./stores/customersStore";
-import { useFetchStore } from "./stores/fetchStore";
+import { useCustomersService } from "./service/customersService";
 
 const customersStore = useCustomersStore();
-const fetchStore = useFetchStore();
+const customersService = useCustomersService();
 
-fetchStore.fetchCustomersFromApi();
+customersService.fetchCustomersFromApi();
 </script>
 
 <template>

@@ -28,13 +28,12 @@ const emit = defineEmits<CustomersListEmits>();
   grid-template-columns: 1fr;
   align-items: start;
   justify-content: center;
+  position: relative;
 
   gap: 50px;
-  height: 100vh;
-  max-height: 100vh;
   max-width: 1065px;
 
   margin: 0 auto;
-  padding: 50px 20px;
+  padding: 0 20px;
 }
 </style>

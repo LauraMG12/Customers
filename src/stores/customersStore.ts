@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { CustomerInfo, ProductsInfo, SortType } from "../model/data.model";
-import { useFetchStore } from "./fetchStore";
+import { useCustomersService } from "../service/customersService";
 
 export const useCustomersStore = defineStore("CustomersStore", () => {
-  const fetchStore = useFetchStore();
-
+  const customersService = useCustomersService();
   // State
   const isCustomerDetailsCardOpened = ref<boolean>(false);
   const customerCardProducts = ref<ProductsInfo[]>([]);
@@ -31,7 +30,7 @@ export const useCustomersStore = defineStore("CustomersStore", () => {
         (product) => product.customerId === customerId
       );
     } else {
-      fetchStore.fetchCustomerProductsFromApi(customerId);
+      customersService.fetchCustomerProductsFromApi(customerId);
     }
   }
   function closeCustomerDetailsCard(): void {
